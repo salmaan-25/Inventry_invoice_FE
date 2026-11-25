@@ -70,13 +70,14 @@ const baseQueryWithReauth: BaseQueryFn<
     }
 
     const url = typeof args === 'string' ? args : (args && 'url' in args ? args.url : '');
-    const isAuthEndpoint =
+    const isPublicOrAuthEndpoint =
       url.includes('/auth/login/') ||
       url.includes('/auth/me/') ||
-      url.includes('/auth/csrf/');
+      url.includes('/auth/csrf/') ||
+      url.includes('/company/');
 
-    // Handle 401 session expiration, excluding initial auth checks and login
-    if (result.error.status === 401 && !isAuthEndpoint) {
+    // Handle 401 session expiration, excluding initial auth checks, login, and company branding
+    if (result.error.status === 401 && !isPublicOrAuthEndpoint) {
       api.dispatch(sessionExpired());
     }
   }
