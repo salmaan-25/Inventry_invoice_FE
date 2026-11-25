@@ -5,7 +5,21 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA client-side routing (redirects all page requests to index.html for React Router)
+# 1. Forward all API calls to your Render backend
+[[redirects]]
+  from = "/api/*"
+  to = "https://inventry-invoice.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+# 2. Forward media/file uploads to your Render backend
+[[redirects]]
+  from = "/media/*"
+  to = "https://inventry-invoice.onrender.com/media/:splat"
+  status = 200
+  force = true
+
+# 3. SPA client-side routing (must be LAST)
 [[redirects]]
   from = "/*"
   to = "/index.html"
