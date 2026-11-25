@@ -9,8 +9,9 @@ import {
   InputAdornment,
   IconButton,
   Alert,
+  Avatar,
 } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import BusinessIcon from '@mui/icons-material/Business';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -19,6 +20,7 @@ import { AuthLayout } from '../../components/layout/AuthLayout';
 import { FormTextField } from '../../components/form/FormTextField';
 import { loginSchema, type LoginFormValues } from '../../schemas/auth';
 import { useLoginMutation } from '../../store/api/authApi';
+import { useGetCompanyQuery } from '../../store/api/companyApi';
 import { useAppDispatch } from '../../store/hooks';
 import { setCredentials } from '../../store/slice/authSlice';
 import { useAuth } from '../../hooks/useAuth';
@@ -28,12 +30,47 @@ import { MESSAGES } from '../../constants/messages';
 import { API_ERROR_CODE } from '../../constants/apiErrorCodes';
 import { parseApiError } from '../../utils/apiError';
 
+const getCachedBranding = () => {
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = localStorage.getItem('company_branding');
+      if (raw) {
+        return JSON.parse(raw) as { business_name?: string; logo?: string };
+      }
+    } catch {
+      // ignore storage error
+    }
+  }
+  return undefined;
+};
+
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { isAuthenticated } = useAuth();
   const { notifySuccess } = useNotify();
+
+  const { data: company } = useGetCompanyQuery();
+  const cached = getCachedBranding();
+  const logo = company?.logo || cached?.logo;
+  const businessName = company?.business_name || cached?.business_name || 'Anifa Traders';
+
+  useEffect(() => {
+    if (company?.business_name) {
+      try {
+        localStorage.setItem(
+          'company_branding',
+          JSON.stringify({
+            business_name: company.business_name,
+            logo: company.logo ?? '',
+          })
+        );
+      } catch {
+        // ignore
+      }
+    }
+  }, [company]);
 
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
@@ -92,25 +129,49 @@ export const LoginPage: React.FC = () => {
 
   return (
     <AuthLayout>
-      <Box
-        sx={{
-          p: 1.5,
-          backgroundColor: 'primary.main',
-          borderRadius: '50%',
-          mb: 1.5,
-          display: 'flex',
-          color: 'primary.contrastText',
-        }}
-      >
-        <LockOutlinedIcon />
-      </Box>
+      {/* Business Logo & Brand Header */}
+      <Box sx={{ mb: 2.5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {logo ? (
+          <Avatar
+            src={logo}
+            alt={businessName}
+            variant="rounded"
+            sx={{
+              width: 72,
+              height: 72,
+              mb: 1.5,
+              boxShadow: 2,
+              border: '2px solid',
+              borderColor: 'divider',
+              bgcolor: 'background.paper',
+              '& img': {
+                objectFit: 'contain',
+              },
+            }}
+          />
+        ) : (
+          <Avatar
+            variant="rounded"
+            sx={{
+              width: 64,
+              height: 64,
+              mb: 1.5,
+              bgcolor: 'primary.main',
+              color: 'primary.contrastText',
+              boxShadow: 2,
+            }}
+          >
+            <BusinessIcon sx={{ fontSize: 36 }} />
+          </Avatar>
+        )}
 
-      <Typography component="h1" variant="h5" fontWeight={600} gutterBottom>
-        Sign In
-      </Typography>
-      <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
-        Billing &amp; Inventory Management System
-      </Typography>
+        <Typography component="h1" variant="h5" fontWeight={700} align="center">
+          {businessName}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 0.5 }}>
+          Billing &amp; Inventory Management
+        </Typography>
+      </Box>
 
       {generalError && (
         <Alert severity="error" sx={{ width: '100%', mb: 2 }}>

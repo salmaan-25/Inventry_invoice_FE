@@ -1,19 +1,31 @@
 import { baseApi } from './baseApi';
 import { API_TAGS } from '../../constants/tags';
+import { setCachedCompanyBranding } from '../../utils/branding';
 import type {
   CompanyProfile,
   CompanyProfileDto,
   UpdateCompanyRequest,
 } from '../../types/api/company';
 
+const syncCompanyBranding = (dto: CompanyProfileDto): CompanyProfile => {
+  const profile: CompanyProfile = {
+    ...dto,
+    logo: dto.logo ?? undefined,
+  };
+  if (profile.business_name) {
+    setCachedCompanyBranding({
+      business_name: profile.business_name,
+      logo: profile.logo,
+    });
+  }
+  return profile;
+};
+
 export const companyApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCompany: builder.query<CompanyProfile, void>({
       query: () => '/company/',
-      transformResponse: (dto: CompanyProfileDto): CompanyProfile => ({
-        ...dto,
-        logo: dto.logo ?? undefined,
-      }),
+      transformResponse: syncCompanyBranding,
       providesTags: [API_TAGS.COMPANY],
     }),
     updateCompany: builder.mutation<CompanyProfile, UpdateCompanyRequest>({
@@ -45,10 +57,7 @@ export const companyApi = baseApi.injectEndpoints({
           },
         };
       },
-      transformResponse: (dto: CompanyProfileDto): CompanyProfile => ({
-        ...dto,
-        logo: dto.logo ?? undefined,
-      }),
+      transformResponse: syncCompanyBranding,
       invalidatesTags: [API_TAGS.COMPANY],
     }),
   }),
