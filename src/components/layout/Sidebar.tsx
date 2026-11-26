@@ -12,10 +12,12 @@ import {
   Typography,
   Avatar,
   Tooltip,
+  IconButton,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import { useLocation, Link as RouterLink } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -62,9 +64,21 @@ export const Sidebar: React.FC = () => {
   const { hasRole } = useAuth();
   const { data: company } = useGetCompanyQuery();
 
+  // On mobile, ensure drawer starts closed on initial load
   React.useEffect(() => {
-    if (isMobile && isOpen) {
+    if (isMobile) {
       dispatch(setSidebarOpen(false));
+    }
+  }, [isMobile, dispatch]);
+
+  // Close the mobile drawer only when the route actually changes (navigation)
+  const prevPathnameRef = React.useRef(location.pathname);
+  React.useEffect(() => {
+    if (prevPathnameRef.current !== location.pathname) {
+      prevPathnameRef.current = location.pathname;
+      if (isMobile && isOpen) {
+        dispatch(setSidebarOpen(false));
+      }
     }
   }, [location.pathname, isMobile, isOpen, dispatch]);
 
@@ -79,55 +93,62 @@ export const Sidebar: React.FC = () => {
 
   const drawerContent = (
     <Box sx={{ overflowX: 'hidden', overflowY: 'auto', height: '100%' }}>
-      <Toolbar />
+      {!isMobile && <Toolbar />}
       <Box
         sx={{
           px: isExpanded ? 2 : 1.5,
           py: 1.5,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: isExpanded ? 'flex-start' : 'center',
+          justifyContent: isExpanded ? 'space-between' : 'center',
           gap: 1.5,
           minHeight: 64,
         }}
       >
-        <Tooltip
-          title={company?.business_name || 'System Menu'}
-          placement="right"
-          disableHoverListener={isExpanded}
-          arrow
-        >
-          {company?.logo ? (
-            <Avatar
-              src={company.logo}
-              alt={company.business_name}
-              variant="rounded"
-              sx={{ width: 36, height: 36, flexShrink: 0 }}
-            />
-          ) : (
-            <Avatar
-              variant="rounded"
-              sx={{
-                width: 36,
-                height: 36,
-                bgcolor: 'primary.light',
-                color: 'primary.contrastText',
-                flexShrink: 0,
-              }}
-            >
-              <BusinessIcon fontSize="small" />
-            </Avatar>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, minWidth: 0 }}>
+          <Tooltip
+            title={company?.business_name || 'System Menu'}
+            placement="right"
+            disableHoverListener={isExpanded}
+            arrow
+          >
+            {company?.logo ? (
+              <Avatar
+                src={company.logo}
+                alt={company.business_name}
+                variant="rounded"
+                sx={{ width: 36, height: 36, flexShrink: 0 }}
+              />
+            ) : (
+              <Avatar
+                variant="rounded"
+                sx={{
+                  width: 36,
+                  height: 36,
+                  bgcolor: 'primary.light',
+                  color: 'primary.contrastText',
+                  flexShrink: 0,
+                }}
+              >
+                <BusinessIcon fontSize="small" />
+              </Avatar>
+            )}
+          </Tooltip>
+          {isExpanded && (
+            <Box sx={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>
+              <Typography variant="subtitle2" noWrap fontWeight={600}>
+                {company?.business_name || 'System Menu'}
+              </Typography>
+              <Typography variant="caption" color="text.secondary" noWrap display="block">
+                {company?.gstin || 'Main Workspace'}
+              </Typography>
+            </Box>
           )}
-        </Tooltip>
-        {isExpanded && (
-          <Box sx={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>
-            <Typography variant="subtitle2" noWrap fontWeight={600}>
-              {company?.business_name || 'System Menu'}
-            </Typography>
-            <Typography variant="caption" color="text.secondary" noWrap display="block">
-              {company?.gstin || 'Main Workspace'}
-            </Typography>
-          </Box>
+        </Box>
+        {isMobile && (
+          <IconButton onClick={handleClose} size="small" aria-label="close drawer" sx={{ flexShrink: 0 }}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
         )}
       </Box>
       <Divider />
