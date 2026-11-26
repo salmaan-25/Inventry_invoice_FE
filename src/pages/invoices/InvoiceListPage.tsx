@@ -211,7 +211,13 @@ export const InvoiceListPage: React.FC = () => {
           ) : undefined
         }
       >
-        <FormControl size="small" sx={{ minWidth: 140 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: { xs: '100%', sm: 140 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <InputLabel id="invoice-status-filter-label">Status</InputLabel>
           <Select
             labelId="invoice-status-filter-label"
@@ -228,7 +234,12 @@ export const InvoiceListPage: React.FC = () => {
           </Select>
         </FormControl>
 
-        <Box sx={{ minWidth: 260 }}>
+        <Box
+          sx={{
+            minWidth: { xs: '100%', sm: 260 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <CustomerPicker
             value={selectedCustomer}
             onChange={(cust) => {
@@ -249,7 +260,10 @@ export const InvoiceListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
 
         <TextField
@@ -262,7 +276,10 @@ export const InvoiceListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
       </FilterBar>
 

@@ -238,7 +238,13 @@ export const OtherIncomeListPage: React.FC = () => {
           placeholder="Search by description or payer..."
         />
 
-        <FormControl size="small" sx={{ minWidth: 160 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: { xs: '100%', sm: 160 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <InputLabel id="income-cat-filter-label">Category</InputLabel>
           <Select
             labelId="income-cat-filter-label"
@@ -268,7 +274,10 @@ export const OtherIncomeListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
 
         <TextField
@@ -281,7 +290,10 @@ export const OtherIncomeListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
       </FilterBar>
 

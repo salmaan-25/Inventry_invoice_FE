@@ -59,12 +59,19 @@ export const DashboardPage: React.FC = () => {
         title="Executive Dashboard"
         subtitle={data?.as_of ? `Financial & Operational Metrics as of ${data.as_of}` : 'Live Business Performance Overview'}
         action={
-          <Stack direction="row" spacing={1.5} flexWrap="wrap">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={1.5}
+            flexWrap="wrap"
+            sx={{ width: { xs: '100%', sm: 'auto' } }}
+          >
             <Button
               variant="contained"
               color="primary"
               startIcon={<AddIcon />}
               onClick={() => navigate(ROUTES.invoices.new)}
+              fullWidth
+              sx={{ width: { sm: 'auto' } }}
             >
               New Invoice
             </Button>
@@ -73,6 +80,8 @@ export const DashboardPage: React.FC = () => {
               color="success"
               startIcon={<PaymentIcon />}
               onClick={() => navigate(ROUTES.payments.new)}
+              fullWidth
+              sx={{ width: { sm: 'auto' } }}
             >
               Record Payment
             </Button>
@@ -80,6 +89,8 @@ export const DashboardPage: React.FC = () => {
               variant="outlined"
               color="inherit"
               onClick={() => navigate(ROUTES.expenses.list)}
+              fullWidth
+              sx={{ width: { sm: 'auto' } }}
             >
               Expenses
             </Button>

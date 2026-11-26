@@ -229,7 +229,13 @@ export const ExpenseListPage: React.FC = () => {
           placeholder="Search by description or recipient..."
         />
 
-        <FormControl size="small" sx={{ minWidth: 160 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: { xs: '100%', sm: 160 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <InputLabel id="expense-cat-filter-label">Category</InputLabel>
           <Select
             labelId="expense-cat-filter-label"
@@ -259,7 +265,10 @@ export const ExpenseListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
 
         <TextField
@@ -272,7 +281,10 @@ export const ExpenseListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
       </FilterBar>
 

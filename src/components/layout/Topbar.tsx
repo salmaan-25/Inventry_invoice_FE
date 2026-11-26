@@ -70,38 +70,42 @@ export const Topbar: React.FC = () => {
           boxShadow: 'none',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ px: { xs: 1, sm: 2 } }}>
           <IconButton
             color="inherit"
             aria-label="toggle drawer"
             edge="start"
             onClick={() => dispatch(toggleSidebar())}
-            sx={{ mr: 2 }}
+            sx={{ mr: { xs: 1, sm: 2 } }}
           >
             <MenuIcon />
           </IconButton>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexGrow: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 }, flexGrow: 1, minWidth: 0 }}>
             {company?.logo && (
               <Avatar
                 src={company.logo}
                 alt={company.business_name}
                 variant="rounded"
-                sx={{ width: 32, height: 32 }}
+                sx={{ width: { xs: 28, sm: 32 }, height: { xs: 28, sm: 32 }, flexShrink: 0 }}
               />
             )}
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ fontWeight: 600 }}
+              sx={{
+                fontWeight: 600,
+                fontSize: { xs: '0.95rem', sm: '1.25rem' },
+                letterSpacing: '-0.2px',
+              }}
             >
               {displayName}
             </Typography>
           </Box>
 
           {currentUser && (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 2 }, flexShrink: 0 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <AccountCircleIcon color="action" />
                 <Box
@@ -123,9 +127,9 @@ export const Topbar: React.FC = () => {
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 0.75,
-                  px: 1,
-                  py: 0.5,
+                  gap: 0.5,
+                  px: { xs: 0.5, sm: 1 },
+                  py: 0.25,
                   borderRadius: 2,
                   border: '1px solid',
                   borderColor: 'divider',
@@ -140,6 +144,7 @@ export const Topbar: React.FC = () => {
                 <Typography
                   variant="caption"
                   sx={{
+                    display: { xs: 'none', sm: 'inline' },
                     fontWeight: 600,
                     color: 'text.secondary',
                     fontSize: '0.75rem',
@@ -158,12 +163,28 @@ export const Topbar: React.FC = () => {
                 />
               </Box>
 
+              <IconButton
+                color="inherit"
+                size="small"
+                aria-label="Logout"
+                onClick={() => setLogoutDialogOpen(true)}
+                sx={{
+                  display: { xs: 'inline-flex', sm: 'none' },
+                  border: '1px solid',
+                  borderColor: 'divider',
+                  p: 0.75,
+                }}
+              >
+                <LogoutIcon fontSize="small" />
+              </IconButton>
+
               <Button
                 variant="outlined"
                 color="inherit"
                 size="small"
                 startIcon={<LogoutIcon />}
                 onClick={() => setLogoutDialogOpen(true)}
+                sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
               >
                 Logout
               </Button>

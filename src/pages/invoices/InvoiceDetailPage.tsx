@@ -243,7 +243,15 @@ export const InvoiceDetailPage: React.FC = () => {
 
       {/* Line Items Table */}
       <SectionCard title="Invoice Items">
-        <TableContainer component={Paper} variant="outlined" sx={{ overflowX: 'auto' }}>
+        <TableContainer
+          component={Paper}
+          variant="outlined"
+          sx={{
+            overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            maxWidth: '100%',
+          }}
+        >
           <Table size="small" sx={{ minWidth: isGst ? 850 : 700 }} aria-label="invoice items table">
             <TableHead sx={{ backgroundColor: 'grey.50' }}>
               <TableRow>
@@ -316,7 +324,14 @@ export const InvoiceDetailPage: React.FC = () => {
             mt: 3,
           }}
         >
-          <Card variant="outlined" sx={{ flex: 1, maxWidth: 380 }}>
+          <Card
+            variant="outlined"
+            sx={{
+              flex: 1,
+              maxWidth: { xs: '100%', md: 380 },
+              width: { xs: '100%', md: 'auto' },
+            }}
+          >
             <CardContent>
               <Typography variant="subtitle2" fontWeight={600} gutterBottom>
                 Payment Summary

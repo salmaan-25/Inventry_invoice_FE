@@ -64,7 +64,7 @@ export function DataTable<T extends object>({
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer>
+      <TableContainer sx={{ WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
         <Table stickyHeader aria-label="data table">
           <TableHead>
             <TableRow>
@@ -133,6 +133,17 @@ export function DataTable<T extends object>({
         page={Math.max(0, page - 1)} // convert 1-based to 0-based
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          '.MuiTablePagination-toolbar': {
+            flexWrap: 'wrap',
+            justifyContent: { xs: 'center', sm: 'flex-end' },
+            px: { xs: 1, sm: 2 },
+            gap: 0.5,
+          },
+          '.MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows': {
+            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+          },
+        }}
       />
     </Paper>
   );

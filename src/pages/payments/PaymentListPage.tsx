@@ -190,7 +190,12 @@ export const PaymentListPage: React.FC = () => {
           ) : undefined
         }
       >
-        <Box sx={{ minWidth: 260 }}>
+        <Box
+          sx={{
+            minWidth: { xs: '100%', sm: 260 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <CustomerPicker
             value={selectedCustomer}
             onChange={(cust) => {
@@ -211,7 +216,10 @@ export const PaymentListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
 
         <TextField
@@ -224,7 +232,10 @@ export const PaymentListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
       </FilterBar>
 

@@ -39,6 +39,12 @@ export const FormDialog: React.FC<FormDialogProps> = ({
       onClose={isSubmitting ? undefined : onClose}
       maxWidth={maxWidth}
       fullWidth
+      sx={{
+        '& .MuiDialog-paper': {
+          m: { xs: 1.5, sm: 3 },
+          width: { xs: 'calc(100% - 24px)', sm: 'auto' },
+        },
+      }}
     >
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         {title}
@@ -52,7 +58,18 @@ export const FormDialog: React.FC<FormDialogProps> = ({
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>{children}</DialogContent>
-      <DialogActions sx={{ px: 3, py: 2 }}>
+      <DialogActions
+        sx={{
+          px: { xs: 2, sm: 3 },
+          py: 2,
+          flexDirection: { xs: 'column-reverse', sm: 'row' },
+          gap: { xs: 1, sm: 0 },
+          '& > button': {
+            width: { xs: '100%', sm: 'auto' },
+            m: { xs: 0, sm: undefined },
+          },
+        }}
+      >
         <Button onClick={onClose} disabled={isSubmitting} color="inherit">
           {cancelLabel}
         </Button>

@@ -203,10 +203,18 @@ export const ChallanListPage: React.FC = () => {
             setInvoiceQuery(e.target.value);
             setPage(1);
           }}
-          sx={{ minWidth: 160 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 160 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
 
-        <Box sx={{ minWidth: 260 }}>
+        <Box
+          sx={{
+            minWidth: { xs: '100%', sm: 260 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <CustomerPicker
             value={selectedCustomer}
             onChange={(cust) => {
@@ -227,7 +235,10 @@ export const ChallanListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
 
         <TextField
@@ -240,7 +251,10 @@ export const ChallanListPage: React.FC = () => {
             setPage(1);
           }}
           InputLabelProps={{ shrink: true }}
-          sx={{ width: 150 }}
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
         />
       </FilterBar>
 

@@ -62,6 +62,12 @@ export const Sidebar: React.FC = () => {
   const { hasRole } = useAuth();
   const { data: company } = useGetCompanyQuery();
 
+  React.useEffect(() => {
+    if (isMobile && isOpen) {
+      dispatch(setSidebarOpen(false));
+    }
+  }, [location.pathname, isMobile, isOpen, dispatch]);
+
   const handleClose = () => {
     if (isMobile) {
       dispatch(setSidebarOpen(false));

@@ -55,7 +55,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
           </InputAdornment>
         ) : undefined,
       }}
-      sx={{ minWidth: 220 }}
+      sx={{ minWidth: { xs: '100%', sm: 220 }, width: { xs: '100%', sm: 'auto' } }}
     />
   );
 };

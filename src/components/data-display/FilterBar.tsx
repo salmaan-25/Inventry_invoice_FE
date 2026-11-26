@@ -10,15 +10,15 @@ export const FilterBar: React.FC<FilterBarProps> = ({ children, actions }) => {
   return (
     <Box
       sx={{
-        p: 2,
+        p: { xs: 1.5, sm: 2 },
         mb: 2,
         backgroundColor: 'background.paper',
         borderRadius: 1,
         border: '1px solid',
         borderColor: 'divider',
         display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
+        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: { xs: 'stretch', md: 'center' },
         justifyContent: 'space-between',
         gap: 2,
       }}
@@ -28,12 +28,20 @@ export const FilterBar: React.FC<FilterBarProps> = ({ children, actions }) => {
         spacing={2}
         flexWrap="wrap"
         alignItems={{ xs: 'stretch', sm: 'center' }}
-        sx={{ flex: 1 }}
+        sx={{ flex: 1, width: { xs: '100%', md: 'auto' } }}
       >
         {children}
       </Stack>
       {actions && (
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{
+            width: { xs: '100%', md: 'auto' },
+            justifyContent: { xs: 'flex-start', sm: 'flex-end' },
+          }}
+        >
           {actions}
         </Stack>
       )}
