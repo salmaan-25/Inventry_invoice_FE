@@ -17,7 +17,7 @@ export const AppShell: React.FC = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: { xs: 2, sm: 3 },
+          p: { xs: 1.5, sm: 2.5, md: 3 },
           width: {
             xs: '100%',
             md: `calc(100% - ${isSidebarOpen ? DRAWER_WIDTH : MINI_DRAWER_WIDTH}px)`,
@@ -34,7 +34,7 @@ export const AppShell: React.FC = () => {
         }}
       >
         <Toolbar />
-        <Container maxWidth="xl" sx={{ mt: 1, mb: 4, px: { xs: 1, sm: 2 } }}>
+        <Container maxWidth="xl" sx={{ mt: 1, mb: 4, px: { xs: 0.5, sm: 2 } }}>
           <Outlet />
         </Container>
       </Box>

@@ -64,13 +64,20 @@ export const InvoiceActions: React.FC<InvoiceActionsProps> = ({
 
   return (
     <>
-      <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap">
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={1.5}
+        alignItems={{ xs: 'stretch', sm: 'center' }}
+        flexWrap="wrap"
+        sx={{ width: { xs: '100%', sm: 'auto' } }}
+      >
         {/* Edit Button is available for both DRAFT and ISSUED invoices */}
         <Button
           variant="outlined"
           startIcon={<EditIcon />}
           onClick={() => navigate(ROUTES.invoices.edit(invoice.id))}
-          sx={{ whiteSpace: 'nowrap' }}
+          fullWidth
+          sx={{ width: { sm: 'auto' }, whiteSpace: 'nowrap' }}
         >
           {isDraft ? 'Edit Draft' : 'Edit Invoice'}
         </Button>
@@ -82,7 +89,8 @@ export const InvoiceActions: React.FC<InvoiceActionsProps> = ({
               color="success"
               startIcon={<CheckCircleOutlineIcon />}
               onClick={() => setConfirmIssueOpen(true)}
-              sx={{ whiteSpace: 'nowrap' }}
+              fullWidth
+              sx={{ width: { sm: 'auto' }, whiteSpace: 'nowrap' }}
             >
               Issue Invoice
             </Button>
@@ -93,7 +101,7 @@ export const InvoiceActions: React.FC<InvoiceActionsProps> = ({
               startIcon={<PictureAsPdfIcon />}
               isLoading={isDocumentLoading}
               onDownload={handleDownloadPdf}
-              sx={{ whiteSpace: 'nowrap' }}
+              sx={{ width: { xs: '100%', sm: 'auto' }, whiteSpace: 'nowrap' }}
             />
           </>
         ) : (
@@ -105,7 +113,7 @@ export const InvoiceActions: React.FC<InvoiceActionsProps> = ({
               startIcon={<PictureAsPdfIcon />}
               isLoading={isDocumentLoading}
               onDownload={handleDownloadPdf}
-              sx={{ whiteSpace: 'nowrap' }}
+              sx={{ width: { xs: '100%', sm: 'auto' }, whiteSpace: 'nowrap' }}
             />
 
             <Button
@@ -113,7 +121,8 @@ export const InvoiceActions: React.FC<InvoiceActionsProps> = ({
               color="success"
               startIcon={<PaymentIcon />}
               onClick={() => navigate(ROUTES.payments.new)}
-              sx={{ whiteSpace: 'nowrap' }}
+              fullWidth
+              sx={{ width: { sm: 'auto' }, whiteSpace: 'nowrap' }}
             >
               Record Payment
             </Button>

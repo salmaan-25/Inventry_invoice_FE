@@ -57,9 +57,14 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         alignItems={{ xs: 'flex-start', md: 'center' }}
         spacing={2}
       >
-        <Box>
+        <Box sx={{ width: { xs: '100%', md: 'auto' } }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
-            <Typography variant="h5" component="h1" fontWeight={600}>
+            <Typography
+              variant="h5"
+              component="h1"
+              fontWeight={600}
+              sx={{ fontSize: { xs: '1.25rem', sm: '1.5rem' } }}
+            >
               {title}
             </Typography>
             {titleExtra}
@@ -70,7 +75,17 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             </Typography>
           )}
         </Box>
-        {action && <Box sx={{ flexShrink: 0 }}>{action}</Box>}
+        {action && (
+          <Box
+            sx={{
+              flexShrink: 0,
+              width: { xs: '100%', md: 'auto' },
+              '& > *': { width: { xs: '100%', sm: 'auto' } },
+            }}
+          >
+            {action}
+          </Box>
+        )}
       </Stack>
     </Box>
   );

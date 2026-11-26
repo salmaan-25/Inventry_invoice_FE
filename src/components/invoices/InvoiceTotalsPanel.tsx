@@ -25,7 +25,14 @@ export const InvoiceTotalsPanel: React.FC<InvoiceTotalsPanelProps> = ({
   const hasAdvance = compareMoney(advance, '0.00') > 0;
 
   return (
-    <Card variant="outlined" sx={{ minWidth: 280, maxWidth: 360, ml: 'auto' }}>
+    <Card
+      variant="outlined"
+      sx={{
+        width: { xs: '100%', sm: 360 },
+        maxWidth: '100%',
+        ml: { xs: 0, sm: 'auto' },
+      }}
+    >
       <CardContent sx={{ p: 2 }}>
         <Typography variant="subtitle2" fontWeight={600} gutterBottom>
           Invoice Summary {isLoading && '(Calculating...)'}

@@ -190,7 +190,13 @@ export const ProductListPage: React.FC = () => {
           placeholder="Search by name or code..."
         />
 
-        <FormControl size="small" sx={{ minWidth: 150 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: { xs: '100%', sm: 150 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <InputLabel id="product-type-filter-label">Item Type</InputLabel>
           <Select
             labelId="product-type-filter-label"
@@ -208,7 +214,13 @@ export const ProductListPage: React.FC = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="small" sx={{ minWidth: 130 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: { xs: '100%', sm: 130 },
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           <InputLabel id="product-status-filter-label">Status</InputLabel>
           <Select
             labelId="product-status-filter-label"

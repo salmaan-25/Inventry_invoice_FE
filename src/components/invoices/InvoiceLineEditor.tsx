@@ -128,7 +128,16 @@ export const InvoiceLineEditor: React.FC<InvoiceLineEditorProps> = ({
       </Box>
 
       {/* Spacious TableContainer with explicit minWidth so columns never squash */}
-      <TableContainer component={Paper} variant="outlined" sx={{ overflowX: 'auto', borderRadius: 2 }}>
+      <TableContainer
+        component={Paper}
+        variant="outlined"
+        sx={{
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          maxWidth: '100%',
+          borderRadius: 2,
+        }}
+      >
         <Table size="small" sx={{ minWidth: isGst ? 1040 : 920 }} aria-label="invoice lines editor table">
           <TableHead sx={{ backgroundColor: 'grey.50' }}>
             <TableRow>

@@ -567,7 +567,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       </Accordion>
 
       {/* Totals Preview Panel */}
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: { xs: 'stretch', sm: 'flex-end' }, width: '100%', mb: 3 }}>
         <InvoiceTotalsPanel
           calculation={calculation}
           invoiceType={invoiceType}
@@ -578,12 +578,19 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       </Box>
 
       {/* Action Buttons */}
-      <Stack direction="row" spacing={2} justifyContent="flex-end">
+      <Stack
+        direction={{ xs: 'column-reverse', sm: 'row' }}
+        spacing={2}
+        justifyContent="flex-end"
+        sx={{ width: { xs: '100%', sm: 'auto' } }}
+      >
         <Button
           variant="outlined"
           color="inherit"
           disabled={isLoading}
           onClick={() => navigate(ROUTES.invoices.list)}
+          fullWidth
+          sx={{ width: { sm: 'auto' } }}
         >
           Cancel
         </Button>
@@ -593,6 +600,8 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
           color="primary"
           startIcon={<SaveIcon />}
           disabled={isLoading}
+          fullWidth
+          sx={{ width: { sm: 'auto' } }}
         >
           {submitLabel}
         </Button>

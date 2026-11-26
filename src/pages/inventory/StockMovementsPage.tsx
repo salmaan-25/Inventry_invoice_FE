@@ -153,10 +153,10 @@ export const StockMovementsPage: React.FC = () => {
           )}
         >
           <FilterBar>
-            <Box sx={{ width: 180 }}>
+            <Box sx={{ width: { xs: '100%', sm: 180 } }}>
               <FormDatePicker name="from" label="From Date" />
             </Box>
-            <Box sx={{ width: 180 }}>
+            <Box sx={{ width: { xs: '100%', sm: 180 } }}>
               <FormDatePicker name="to" label="To Date" />
             </Box>
             {dateError && (
